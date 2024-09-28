@@ -1,0 +1,57 @@
+@font-face {
+  font-family: "bpmoleculesregular";
+  src: url("fonts/bpmolecules-webfont.eot");
+  src: url("fonts/bpmolecules-webfont.eot?#iefix") format("embedded-opentype"),
+    url("fonts/bpmolecules-webfont.woff2") format("woff2"),
+    url("fonts/bpmolecules-webfont.woff") format("woff"),
+    url("fonts/bpmolecules-webfont.ttf") format("truetype"),
+    url("fonts/bpmolecules-webfont.svg#bpmoleculesregular") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "quenya";
+  src: url("fonts/quenya-webfont.eot");
+  src: url("fonts/quenya-webfont.eot?#iefix") format("embedded-opentype"),
+    url("fonts/quenya-webfont.woff2") format("woff2"),
+    url("fonts/quenya-webfont.woff") format("woff"),
+    url("fonts/quenya-webfont.ttf") format("truetype"),
+    url("fonts/quenya-webfont.svg#bpmoleculesregular") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "magmawave_capsbold";
+  src: url("fonts/magmawave_caps-webfont.eot");
+  src: url("fonts/magmawave_caps-webfont.eot?#iefix")
+      format("embedded-opentype"),
+    url("fonts/magmawave_caps-webfont.woff2") format("woff2"),
+    url("fonts/magmawave_caps-webfont.woff") format("woff"),
+    url("fonts/magmawave_caps-webfont.ttf") format("truetype"),
+    url("fonts/magmawave_caps-webfont.svg#magmawave_capsbold") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
+.nowrapColumn {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  max-width: 1px;
+}
+
+.item-media .item-inner:after {
+  visibility: hidden;
+}
+
+.item-media .item-inner {
+    padding-bottom: 0px !important;
+}
+
+.item-media {
+    padding-bottom: 0px !important;
+}
+
+.

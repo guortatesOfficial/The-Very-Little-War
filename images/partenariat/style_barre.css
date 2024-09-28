@@ -1,0 +1,177 @@
+
+
+.ring_barre {
+	position:relative; 
+	width:100%;
+	height:30px; 
+	background-color:black; 
+	border-bottom:1px solid #888888;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+}
+.ring_barre .ico {
+	position:relative; 
+	top:1px; left:4px; 
+	float:left; 
+	background-image:url(http://www.theverylittlewar.com/images/partenariat/icone.png); 
+	width:54px; 
+	height:27px;
+}
+.ring_barre .titre {
+	font-size:15px; 
+	font-family:Verdana; 
+	float:left; 
+	position:relative; 
+	top:5px; 
+	left:13px; 
+	padding:0; 
+	margin:0; 
+}
+.ring_barre .nos_jeux {
+	cursor:pointer; 
+	border:1px solid #424242; 
+	width:100px; 
+	height:22px; 
+	line-height:14px; 
+	font-size:10px; 
+	color:#EAFFFF; 
+	padding: 6px 14px 0 4px; 
+	font-family:Verdana; 
+	float:right; 
+	position:relative;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+}
+.ring_barre .nos_jeux:hover {
+	background-color:#333;
+	-webkit-transition: all 0.3s ease-out;
+	-moz-transition: all 0.3s ease-out;
+}
+.ring_barre .fleche_menu {
+	width:21px; 
+	height:15px; 
+	display:inline-block; 
+	background-image:url(http://www.theverylittlewar.com/images/partenariat/fleche.png); 
+	position:absolute; 
+	top:7px; 
+	right:15px;
+}
+.ring_barre a, #ring_barre_wrapper a {
+	font-size:15px; 
+	color:#EAFFFF; 
+	font-family:Verdana; 
+	font-variant:small-caps;
+}
+.ring_barre a:hover, #ring_barre_wrapper a:hover {
+	color:#FFAF9B;
+}
+#ring_news span {font-size:9px;}
+
+#ring_barre_wrapper {
+	width:478px; 
+	height:auto; 
+	display:none; 
+	border:1px solid #676767; 
+	padding:5px; 
+	position:absolute; 
+	top:25px; 
+	right:1%;
+	background-color:#222;
+	font-family:Verdana;
+	font-size:12px;
+	z-index:999999;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+}
+
+#ring_barre_wrapper > div {
+	margin-bottom:10px; 
+	padding:5px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	background-color:#333;
+	height: 100px;
+}
+
+#ring_barre_wrapper > div:hover {
+	background-color:#444;
+	-webkit-transition: all 0.3s ease-out;
+	-moz-transition: all 0.3s ease-out;
+}
+#ring_barre_wrapper > div:last-child {margin-bottom:0;} 
+#ring_barre_wrapper p {text-align:center;}
+
+.degrade_ring_barre {
+	/* Anciens navigateurs */
+	background: #333333;
+	-o-background-size: 100% 100%;
+	-moz-background-size: 100% 100%;
+	-webkit-background-size: 100% 100%;
+	background-size: 100% 100%;
+	/* Navigateurs récents */
+	background: -webkit-gradient(
+		linear,
+		left top, left bottom,
+		from(#000000),
+		to(#333333)
+	);
+	background: -webkit-linear-gradient(
+		top,
+		#000000,
+		#333333
+	);
+	background: -moz-linear-gradient(
+		top,
+		#000000,
+		#333333
+	);
+	background: -o-linear-gradient(
+		top,
+		#000000,
+		#333333
+	);
+	background: linear-gradient(
+		top,
+		#000000,
+		#333333
+	);
+}
+
+@media screen and (max-width: 1050px) {
+	.news {
+		display: none;
+	}
+}
+
+@media screen and (max-width: 500px) {
+	.ring_barre .titre {
+		font-size:10px; 
+		margin-top:3px
+	}
+	
+	#ring_barre_wrapper {
+		width:310px; 
+		height:auto; 
+	}
+	
+	#ring_barre_wrapper > div {
+		margin-bottom:5px; 
+		height: 80px;
+	}	
+	
+	.img-reponsive {
+		width: 300px;
+		height:38px;
+	}
+	
+	
+	
+}
+
+@media screen and (max-width: 375px) {
+	.ring_barre .titre {
+		font-size:8px; 
+		margin-top:6px
+	}
+}
