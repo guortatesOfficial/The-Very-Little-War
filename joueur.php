@@ -15,7 +15,8 @@ include("includes/bbcode.php");
 include("includes/tout.php");
 
 if (isset($_GET['id'])) {
-	$sql = 'SELECT * FROM membre WHERE login="'.mysqli_real_escape_string($base,stripslashes(antihtml($_GET['id']))).'"';
+	$_GET['id'] = antiXSS($_GET['id']);
+	$sql = 'SELECT * FROM membre WHERE login="'.$_GET['id'].'"';
 	$req = mysqli_query($base,$sql) or die('Erreur SQL !<br />'.$sql.'<br />'.mysql_error());
 	$membre = mysqli_fetch_array($req);
 	$nb = mysqli_num_rows($req);
@@ -38,13 +39,7 @@ if (isset($_GET['id'])) {
 	while($donnees4 = mysqli_fetch_array($req4)) {
 		$nb_molecules = $nb_molecules + $donnees4['nombre'];
 	}
-}
-
-if(isset($_GET['id'])) { 
-	if($nb<=0) {
-		$membre['login'] = "Joueur inexistant";
-	}
-
+    
 	if($nb > 0 ) {
         debutCarte($membre['login']);
         $titre = 'Joueur';
@@ -96,8 +91,8 @@ if(isset($_GET['id'])) {
                 echo '</div>';
             finCarte();
         }
-	}
-	else {
+	} else {
+        $membre['login'] = "Joueur inexistant";
         debutCarte("Erreur");
         debutContent();
 		echo  "Ce joueur n'existe pas !";

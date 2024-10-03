@@ -48,9 +48,11 @@ if (isset($_POST['titre']) and isset($_POST['destinataire']) and isset($_POST['c
 include("includes/tout.php");
 
 if (isset($_GET['id'])) {
+	$_GET['id'] = antiXSS($_GET['id']);
 	$ex = mysqli_query($base, 'SELECT expeditaire, contenu, destinataire FROM messages WHERE id=\'' . $_GET['id'] . '\'');
 	$message = mysqli_fetch_array($ex);
 } elseif (isset($_POST['id'])) {
+	$_POST['id'] = antiXSS($_POST['id']);
 	$ex = mysqli_query($base, 'SELECT expeditaire, contenu, destinataire FROM messages WHERE id=\'' . $_POST['id'] . '\'');
 	$message = mysqli_fetch_array($ex);
 } else {

@@ -13,6 +13,7 @@ else
 include("includes/tout.php");
 
 if(isset($_GET['id'])) {
+	$_GET['id'] = antiXSS($_GET['id']);
 	$ex = mysqli_query($base,'SELECT * FROM declarations WHERE id=\''.$_GET['id'].'\' AND type=0');
 	$guerre = mysqli_fetch_array($ex);
 	$nbGuerres = mysqli_num_rows($ex);

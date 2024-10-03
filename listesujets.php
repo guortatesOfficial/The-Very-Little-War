@@ -17,6 +17,8 @@ if(!isset($_GET['id'])
 	header('Location: forum.php');
 }
 
+$_GET['id'] = antiXSS($_GET['id']);
+
 if (isset($_POST['titre']) and isset($_POST['contenu'])) {
 	if (isset($_SESSION['login'])) {
 		if (!empty($_POST['titre']) and !empty($_POST['contenu'])) {
