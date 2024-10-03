@@ -1450,7 +1450,11 @@ function diminuerBatiment($nom, $joueur)
             }
         }
 
-        query('UPDATE constructions SET ' . $nom . '=\'' . ($batiments[$nom] - 1) . '\'' . $plus . ' WHERE login=\'' . $joueur . '\'');
+        $levelPostAttack = $batiments[$nom] - 1;
+        if($nom == 'depot' && $levelPostAttack < 1) {
+            $levelPostAttack = 1;
+        }
+        query('UPDATE constructions SET ' . $nom . '=\'' . $levelPostAttack . '\'' . $plus . ' WHERE login=\'' . $joueur . '\'');
         ajouterPoints(-$listeConstructions[$nom]['points'], $joueur);
     }
 
