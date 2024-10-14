@@ -15,7 +15,7 @@ if($nb_messages > 0) {
 	<thead>
 	<tr>
 	<th>Titre</th>
-	<th>Auteur</th>
+	<th>Destinataire</th>
 	<th>Date</th>
 	</tr></thead><tbody>';
 	while($message = mysqli_fetch_array($ex)) {
