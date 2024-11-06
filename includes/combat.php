@@ -29,14 +29,14 @@ while ($classeAttaquant = mysqli_fetch_array($exClasse1)) {
 
 // recupération des niveaux des atomes
 
-$exNiveaux = query('SELECT pointsProducteur FROM constructions WHERE login=\'' . $actions['attaquant'] . '\'');
+$exNiveaux = query('SELECT pointsCondenseur FROM constructions WHERE login=\'' . $actions['attaquant'] . '\'');
 $niveauxAttaquant = mysqli_fetch_array($exNiveaux);
 $niveauxAttaquant = explode(";", $niveauxAttaquant['pointsProducteur']);
 foreach ($nomsRes as $num => $ressource) {
 	$niveauxAtt[$ressource] = $niveauxAttaquant[$num];
 }
 
-$exNiveaux = query('SELECT pointsProducteur FROM constructions WHERE login=\'' . $actions['defenseur'] . '\'');
+$exNiveaux = query('SELECT pointsCondenseur FROM constructions WHERE login=\'' . $actions['defenseur'] . '\'');
 $niveauxDefenseur = mysqli_fetch_array($exNiveaux);
 $niveauxDefenseur = explode(";", $niveauxDefenseur['pointsProducteur']);
 foreach ($nomsRes as $num => $ressource) {
