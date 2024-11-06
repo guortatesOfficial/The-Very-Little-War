@@ -232,7 +232,7 @@ if (isset($_GET['id'])) {
 				item(['input' => submit(['titre' => 'Répondre', 'form' => 'reponseForm'])]);
 				finListe();
 			} else {
-				echo "Ce sujet est vérouillé.";
+				echo "Ce sujet est verrouillé.";
 			}
 			finCarte();
 		}

@@ -49,7 +49,7 @@ Améliorations : <br/>
 - le nombre de joueurs par équipe est limité à 20<br/>
 <br/>
 </p>
-<?php echo important('Version 1.5.0.0'); ?>
+<?php echo important('Version 1.7.0.0'); ?>
 (~50h de travail)<br/><br/>
 <p>Bugs corrigés : <br/>
 - bug sur les attaques qui ne mettait pas bien à jour les ressources du défenseur<br/>

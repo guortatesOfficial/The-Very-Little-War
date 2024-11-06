@@ -152,12 +152,12 @@ $idforum = mysqli_fetch_array($ex);
 				echo important('Légende'); ?>
 				<img src="images/forum/nouveauMessage.png" alt="nouveauMessage" style="vertical-align:middle" class="w32" /> : Un ou plusieurs nouveaux messages<br /><br />
 				<img src="images/forum/pasDeNouveauMessage.png" alt="pasDeNouveauMessage" style="vertical-align:middle" class="w32" /> : Pas de nouveaux messages<br /><br />
-				<img src="images/forum/sujetVerouille.png" alt="sujetVerouille" style="vertical-align:middle" class="w32" /> : Sujet vérouillé<br />
+				<img src="images/forum/sujetVerouille.png" alt="sujetVerouille" style="vertical-align:middle" class="w32" /> : Sujet verrouillé<br />
 			<?php
 			} else {
 				echo important('Légende'); ?>
 				<img src="images/forum/pasDeNouveauMessage.png" alt="pasDeNouveauMessage" style="vertical-align:middle" /> : Sujet ouvert<br />
-				<img src="images/forum/sujetVerouille.png" alt="sujetVerouille" style="vertical-align:middle" /> : Sujet verouillé<br />
+				<img src="images/forum/sujetVerouille.png" alt="sujetVerouille" style="vertical-align:middle" /> : Sujet verrouillé<br />
 			<?php } ?>
 		</p><?php
 	} else {
