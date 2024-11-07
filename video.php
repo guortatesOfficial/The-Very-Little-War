@@ -21,7 +21,7 @@ include("include.php");
 	<body>
 		<?php 
 		if(isset($_GET['id'])) {
-			$_GET['id'] = antihtml($_GET['id']);
+			$_GET['id'] = antiXSS($_GET['id']);
 			$ex = query('SELECT lien FROM liens WHERE id=\''.$_GET['id'].'\'');
 			$data = mysqli_fetch_array($ex);
 
