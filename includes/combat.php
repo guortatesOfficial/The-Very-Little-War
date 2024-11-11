@@ -31,14 +31,14 @@ while ($classeAttaquant = mysqli_fetch_array($exClasse1)) {
 
 $exNiveaux = query('SELECT pointsCondenseur FROM constructions WHERE login=\'' . $actions['attaquant'] . '\'');
 $niveauxAttaquant = mysqli_fetch_array($exNiveaux);
-$niveauxAttaquant = explode(";", $niveauxAttaquant['pointsProducteur']);
+$niveauxAttaquant = explode(";", $niveauxAttaquant['pointsCondenseur']);
 foreach ($nomsRes as $num => $ressource) {
 	$niveauxAtt[$ressource] = $niveauxAttaquant[$num];
 }
 
 $exNiveaux = query('SELECT pointsCondenseur FROM constructions WHERE login=\'' . $actions['defenseur'] . '\'');
 $niveauxDefenseur = mysqli_fetch_array($exNiveaux);
-$niveauxDefenseur = explode(";", $niveauxDefenseur['pointsProducteur']);
+$niveauxDefenseur = explode(";", $niveauxDefenseur['pointsCondenseur']);
 foreach ($nomsRes as $num => $ressource) {
 	$niveauxDef[$ressource] = $niveauxDefenseur[$num];
 }
@@ -256,6 +256,7 @@ if ($hydrogeneTotal > 0) { // si il y a de l'hydrogène
 						break;
 					case 3:
 						$degatsProducteur += $degatsAMettre;
+						break;
 					default:
 						$degatsDepot += $degatsAMettre;
 						break;
@@ -265,7 +266,6 @@ if ($hydrogeneTotal > 0) { // si il y a de l'hydrogène
 	}
 
 	//gestion des destructions de batiments
-
 	if ($degatsGenEnergie > 0) {
 		$destructionGenEnergie = round($constructions['vieGenerateur'] / pointsDeVie($constructions['generateur']) * 100) . "% <img alt=\"fleche\" src=\"images/attaquer/arrow.png\"/ class=\"w16\" style=\"vertical-align:middle\"> " . max(round(($constructions['vieGenerateur'] - $degatsGenEnergie) / pointsDeVie($constructions['generateur']) * 100), 0) . "%";
 		if ($degatsGenEnergie >= $constructions['vieGenerateur']) {
