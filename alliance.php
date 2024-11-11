@@ -19,7 +19,9 @@ if (mysqli_num_rows($ex) == 0) {
 
 // si pas d'id alors on cherche notre alliance
 if (!isset($_GET['id'])) {
-    $_GET['id'] = $allianceJoueur['tag'];
+    $_GET['id'] = antiXSS($allianceJoueur['tag']);
+} else {
+    $_GET['id'] = antiXSS($_GET['id']);
 }
 
 if (isset($_POST['nomalliance']) and isset($_POST['tagalliance']) && $allianceJoueur['tag'] == -1) {

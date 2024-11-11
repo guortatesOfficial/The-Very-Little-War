@@ -67,7 +67,7 @@ include("debut.php");
                     <!-- Featured slider starts here -->
                 <div class="featured-slider">
                     <?php if(isset($_GET['id'])) {
-                        $_GET['id'] = antihtml($_GET['id']);
+	                    $_GET['id'] = antiXSS($_GET['id']);
                         $ex = query('SELECT *, count(*) AS nb FROM tableaux WHERE id=\''.$_GET['id'].'\'');
                         $data = mysqli_fetch_array($ex);
                         if($data['nb'] >= 1){

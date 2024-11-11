@@ -9,6 +9,7 @@ if (isset($_SESSION['login'])) {
 include("includes/bbcode.php");
 
 if (isset($_POST['contenu']) and isset($_GET['id'])) {
+	$_GET['id'] = antiXSS($_GET['id']);
 	if (preg_match("#^[0-9]*$#", $_GET['id'])) {
 		if (isset($_SESSION['login'])) {
 			if (!empty($_POST['contenu'])) {
@@ -36,6 +37,7 @@ if (isset($_POST['contenu']) and isset($_GET['id'])) {
 include("includes/tout.php");
 
 if (isset($_GET['id'])) {
+	$_GET['id'] = antiXSS($_GET['id']);
 	$sql = 'SELECT * FROM reponses WHERE idsujet=\'' . $_GET['id'] . '\'';
 	$ex = mysqli_query($base, $sql) or die('Erreur SQL !' . $sql . '<br />' . mysql_error());
 	$nb_resultats = mysqli_num_rows($ex);

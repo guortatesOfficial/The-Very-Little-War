@@ -27,8 +27,9 @@ foreach ($paliersTerreur as $num => $palier) {
 
 if (isset($_POST['joueurAEspionner']) && isset($_POST['nombreneutrinos'])) {
     if (!empty($_POST['joueurAEspionner']) && !empty($_POST['nombreneutrinos'])) { // Vérification que la variable n'est pas vide
+        $_POST['joueurAEspionner'] = antiXSS($_POST['joueurAEspionner']);
+        $_POST['nombreneutrinos'] = antiXSS($_POST['nombreneutrinos']);
         if ($_POST['joueurAEspionner'] != $_SESSION['login']) {
-            $_POST['nombreneutrinos'] = antiXSS($_POST['nombreneutrinos']);
             if (preg_match("#^[0-9]*$#", $_POST['nombreneutrinos']) and $_POST['nombreneutrinos'] >= 1 and $_POST['nombreneutrinos'] <= $autre['neutrinos']) {
                 $ex = query('SELECT * FROM membre WHERE login=\'' . $_POST['joueurAEspionner'] . '\'');
                 $membreJoueur = mysqli_fetch_array($ex);
