@@ -2650,3 +2650,21 @@ function scriptAffichageTemps()
         }
     </script>';
 }
+
+
+function isSujetLocked($idSujet)
+{
+    global $base;
+
+    $locked = true;
+    $idSujet = antiXSS($idSujet);
+
+    $ex = mysqli_query($base, 'SELECT statut FROM sujets WHERE id=\'' . $idSujet . '\'');
+    $sujet = mysqli_fetch_array($ex);
+
+    if($sujet && $sujet['statut'] == 0) {
+        $locked = false;
+    }
+
+    return $locked;
+}

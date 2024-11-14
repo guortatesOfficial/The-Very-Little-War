@@ -10,7 +10,7 @@ include("includes/bbcode.php");
 
 if (isset($_POST['contenu']) and isset($_GET['id'])) {
 	$_GET['id'] = antiXSS($_GET['id']);
-	if (preg_match("#^[0-9]*$#", $_GET['id'])) {
+	if (preg_match("#^[0-9]*$#", $_GET['id']) && !isSujetLocked($_GET['id'])) {
 		if (isset($_SESSION['login'])) {
 			if (!empty($_POST['contenu'])) {
 				$_POST['contenu'] = mysqli_real_escape_string($base, ($_POST['contenu']));
