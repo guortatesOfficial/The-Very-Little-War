@@ -56,7 +56,7 @@ if (isset($_POST['nomalliance']) and isset($_POST['tagalliance']) && $allianceJo
                     $erreur = "Une équipe avec ce nom ou ce tag existe déja.";
                 }
             } else {
-                $erreur = "Le TAG de l'alliance ne peut être composé que de lettres et de nombres.";
+                $erreur = "Le TAG de l'alliance ne peut être composé que de lettres, nombres, \"_\", entre 3 et 16 caractères.";
             }
         } else {
             $erreur =  "Vous avez déja une équipe";
