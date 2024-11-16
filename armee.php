@@ -111,7 +111,7 @@ if (isset($_POST['emplacementmoleculeformer']) and !empty($_POST['emplacementmol
                 $bool = 0;
             }
         }
-        if ($bool == 1) {
+        if ($bool == 1 && $donneesFormer['formule'] != "Vide") {
             $sqlNbMolecules = 'SELECT nombre FROM molecules WHERE proprietaire=\'' . $_SESSION['login'] . '\' AND nombre!=0';
             $exNbMolecules = mysqli_query($base, $sqlNbMolecules) or die('Erreur SQL !<br />' . $sqlNbMolecules . '<br />' . mysql_error());
             $nb_molecules = 0;
@@ -180,7 +180,10 @@ if (isset($_POST['emplacementmoleculecreer1']) and !empty($_POST['emplacementmol
                     $bool = 0;
                 }
             }
-            if ($bool == 0) {
+			$sql4 = 'SELECT formule FROM molecules WHERE proprietaire=\'' . $_SESSION['login'] . '\' AND numeroclasse=\'' . $_POST['emplacementmoleculesupprimer'] . '\'';
+			$ex4 = mysqli_query($base, $sql2) or die('Erreur SQL !<br />' . $sql2 . '<br />' . mysql_error());
+			$emplacement = mysqli_fetch_array($ex4);
+            if ($bool == 0 && $emplacement['formule'] == "Vide") {
                 $sql = 'SELECT energie, niveauclasse FROM ressources WHERE login=\'' . $_SESSION['login'] . '\'';
                 $ex = mysqli_query($base, $sql) or die('Erreur SQL !<br />' . $sql . '<br />' . mysql_error());
                 $cout = mysqli_fetch_array($ex);
