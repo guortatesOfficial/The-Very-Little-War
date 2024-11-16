@@ -185,8 +185,8 @@ if (isset($_POST['emplacementmoleculecreer1']) and !empty($_POST['emplacementmol
                 }
             }
             if ($bool == 0) {
-                $sql4 = 'SELECT formule FROM molecules WHERE proprietaire=\'' . $_SESSION['login'] . '\' AND numeroclasse=\'' . $_POST['emplacementmoleculesupprimer'] . '\'';
-                $ex4 = mysqli_query($base, $sql2) or die('Erreur SQL !<br />' . $sql2 . '<br />' . mysql_error());
+                $sql4 = 'SELECT formule FROM molecules WHERE proprietaire=\'' . $_SESSION['login'] . '\' AND numeroclasse=\'' . $_POST['emplacementmoleculecreer1'] . '\'';
+                $ex4 = mysqli_query($base, $sql4) or die('Erreur SQL !<br />' . $sql4 . '<br />' . mysql_error());
                 $emplacement = mysqli_fetch_array($ex4);
                 if($emplacement['formule'] == "Vide") {
                     $sql = 'SELECT energie, niveauclasse FROM ressources WHERE login=\'' . $_SESSION['login'] . '\'';
