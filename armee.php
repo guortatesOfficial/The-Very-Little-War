@@ -111,46 +111,50 @@ if (isset($_POST['emplacementmoleculeformer']) and !empty($_POST['emplacementmol
                 $bool = 0;
             }
         }
-        if ($bool == 1 && $donneesFormer['formule'] != "Vide") {
-            $sqlNbMolecules = 'SELECT nombre FROM molecules WHERE proprietaire=\'' . $_SESSION['login'] . '\' AND nombre!=0';
-            $exNbMolecules = mysqli_query($base, $sqlNbMolecules) or die('Erreur SQL !<br />' . $sqlNbMolecules . '<br />' . mysql_error());
-            $nb_molecules = 0;
-            /*while($nbMolecules = mysqli_fetch_array($exNbMolecules)) {
-				$nb_molecules = $nb_molecules + $nbMolecules['nombre'];
-			}
-			if(($_POST['nombremolecules'] + $nb_molecules) <= $ressources['terrain']) {*/
-            $total = 0;
-            foreach ($nomsRes as $num => $ressource) {
-                $total = $total + $donneesFormer[$ressource];
-            }
-
-            $ex = query('SELECT * FROM actionsformation WHERE login=\'' . $_SESSION['login'] . '\' ORDER BY fin DESC');
-            $nb = mysqli_num_rows($ex);
-            if ($nb > 0) { // s'il y a deja quelque chose en cours, on le met derriere
-                $actionsformation = mysqli_fetch_array($ex);
-                $tempsDebut = $actionsformation['fin'];
-            } else {
-                $tempsDebut = time();
-            }
-
-            query('INSERT INTO actionsformation VALUES(default,"' . $donneesFormer['id'] . '","' . $_SESSION['login'] . '","' . $tempsDebut . '","' . ($tempsDebut + tempsFormation($donneesFormer['azote'], $niveauazote, $total, $_SESSION['login']) * $_POST['nombremolecules']) . '","' . $_POST['nombremolecules'] . '","' . $_POST['nombremolecules'] . '","' . $donneesFormer['formule'] . '","' . tempsFormation($donneesFormer['azote'], $niveauazote, $total, $_SESSION['login']) . '")');
-
-            $chaine = ""; // on passe toutes les chaines sauf conditions pour les ressources en dynamique 
-            foreach ($nomsRes as $num => $ressource) {
-                $plus = "";
-                if ($num < $nbRes) {
-                    $plus = ",";
+        if ($bool == 1) {
+            if ($donneesFormer['formule'] != "Vide") {
+                $sqlNbMolecules = 'SELECT nombre FROM molecules WHERE proprietaire=\'' . $_SESSION['login'] . '\' AND nombre!=0';
+                $exNbMolecules = mysqli_query($base, $sqlNbMolecules) or die('Erreur SQL !<br />' . $sqlNbMolecules . '<br />' . mysql_error());
+                $nb_molecules = 0;
+                /*while($nbMolecules = mysqli_fetch_array($exNbMolecules)) {
+                    $nb_molecules = $nb_molecules + $nbMolecules['nombre'];
                 }
-                $chaine = $chaine . '' . $ressource . '=' . ($ressources[$ressource] - ($_POST['nombremolecules'] * $donneesFormer[$ressource])) . '' . $plus;
-            }
-            $sql3 = 'UPDATE ressources SET ' . $chaine . ' WHERE login=\'' . $_SESSION['login'] . '\'';
-            $req3 = mysqli_query($base, $sql3) or die('Erreur SQL !<br />' . $sql3 . '<br />' . mysql_error());
+                if(($_POST['nombremolecules'] + $nb_molecules) <= $ressources['terrain']) {*/
+                $total = 0;
+                foreach ($nomsRes as $num => $ressource) {
+                    $total = $total + $donneesFormer[$ressource];
+                }
 
-            $information = 'Vous avez lancé la formation de ' . $_POST['nombremolecules'] . ' molécules de ' . couleurFormule($donneesFormer['formule']) . '';
-            /*}
-			else {
-				$erreur = "Vous n'avez pas assez d'espace.";
-			}*/
+                $ex = query('SELECT * FROM actionsformation WHERE login=\'' . $_SESSION['login'] . '\' ORDER BY fin DESC');
+                $nb = mysqli_num_rows($ex);
+                if ($nb > 0) { // s'il y a deja quelque chose en cours, on le met derriere
+                    $actionsformation = mysqli_fetch_array($ex);
+                    $tempsDebut = $actionsformation['fin'];
+                } else {
+                    $tempsDebut = time();
+                }
+
+                query('INSERT INTO actionsformation VALUES(default,"' . $donneesFormer['id'] . '","' . $_SESSION['login'] . '","' . $tempsDebut . '","' . ($tempsDebut + tempsFormation($donneesFormer['azote'], $niveauazote, $total, $_SESSION['login']) * $_POST['nombremolecules']) . '","' . $_POST['nombremolecules'] . '","' . $_POST['nombremolecules'] . '","' . $donneesFormer['formule'] . '","' . tempsFormation($donneesFormer['azote'], $niveauazote, $total, $_SESSION['login']) . '")');
+
+                $chaine = ""; // on passe toutes les chaines sauf conditions pour les ressources en dynamique 
+                foreach ($nomsRes as $num => $ressource) {
+                    $plus = "";
+                    if ($num < $nbRes) {
+                        $plus = ",";
+                    }
+                    $chaine = $chaine . '' . $ressource . '=' . ($ressources[$ressource] - ($_POST['nombremolecules'] * $donneesFormer[$ressource])) . '' . $plus;
+                }
+                $sql3 = 'UPDATE ressources SET ' . $chaine . ' WHERE login=\'' . $_SESSION['login'] . '\'';
+                $req3 = mysqli_query($base, $sql3) or die('Erreur SQL !<br />' . $sql3 . '<br />' . mysql_error());
+
+                $information = 'Vous avez lancé la formation de ' . $_POST['nombremolecules'] . ' molécules de ' . couleurFormule($donneesFormer['formule']) . '';
+                /*}
+                else {
+                    $erreur = "Vous n'avez pas assez d'espace.";
+                }*/
+            } else {
+                $erreur = "Cet emplacement est vide.";
+            }
         } else {
             $erreur = "Vous n'avez pas assez d'atomes.";
         }
@@ -180,48 +184,52 @@ if (isset($_POST['emplacementmoleculecreer1']) and !empty($_POST['emplacementmol
                     $bool = 0;
                 }
             }
-			$sql4 = 'SELECT formule FROM molecules WHERE proprietaire=\'' . $_SESSION['login'] . '\' AND numeroclasse=\'' . $_POST['emplacementmoleculesupprimer'] . '\'';
-			$ex4 = mysqli_query($base, $sql2) or die('Erreur SQL !<br />' . $sql2 . '<br />' . mysql_error());
-			$emplacement = mysqli_fetch_array($ex4);
-            if ($bool == 0 && $emplacement['formule'] == "Vide") {
-                $sql = 'SELECT energie, niveauclasse FROM ressources WHERE login=\'' . $_SESSION['login'] . '\'';
-                $ex = mysqli_query($base, $sql) or die('Erreur SQL !<br />' . $sql . '<br />' . mysql_error());
-                $cout = mysqli_fetch_array($ex);
-                if ($cout['energie'] >= (coutClasse($cout['niveauclasse']))) {
-                    $formule = "";
-                    foreach ($nomsRes as $num => $ressource) {
-                        if (!empty($_POST[$ressource])) {
-                            $$ressource = $_POST[$ressource];
-                            if ($_POST[$ressource] > 1) {
-                                $formule = '' . $formule . '' . $lettre[$num] . '<sub>' . $_POST[$ressource] . '</sub>';
+            if ($bool == 0) {
+                $sql4 = 'SELECT formule FROM molecules WHERE proprietaire=\'' . $_SESSION['login'] . '\' AND numeroclasse=\'' . $_POST['emplacementmoleculesupprimer'] . '\'';
+                $ex4 = mysqli_query($base, $sql2) or die('Erreur SQL !<br />' . $sql2 . '<br />' . mysql_error());
+                $emplacement = mysqli_fetch_array($ex4);
+                if($emplacement['formule'] == "Vide") {
+                    $sql = 'SELECT energie, niveauclasse FROM ressources WHERE login=\'' . $_SESSION['login'] . '\'';
+                    $ex = mysqli_query($base, $sql) or die('Erreur SQL !<br />' . $sql . '<br />' . mysql_error());
+                    $cout = mysqli_fetch_array($ex);
+                    if ($cout['energie'] >= (coutClasse($cout['niveauclasse']))) {
+                        $formule = "";
+                        foreach ($nomsRes as $num => $ressource) {
+                            if (!empty($_POST[$ressource])) {
+                                $$ressource = $_POST[$ressource];
+                                if ($_POST[$ressource] > 1) {
+                                    $formule = '' . $formule . '' . $lettre[$num] . '<sub>' . $_POST[$ressource] . '</sub>';
+                                } else {
+                                    $formule = $formule . '' . $lettre[$num];
+                                }
                             } else {
-                                $formule = $formule . '' . $lettre[$num];
+                                $$ressource = 0;
                             }
-                        } else {
-                            $$ressource = 0;
                         }
-                    }
 
-                    $sql1 = 'UPDATE ressources SET niveauclasse = \'' . ($cout['niveauclasse'] + 1) . '\' WHERE login=\'' . $_SESSION['login'] . '\'';
-                    $ex1 = mysqli_query($base, $sql1) or die('Erreur SQL !<br />' . $sql1 . '<br />' . mysql_error());
+                        $sql1 = 'UPDATE ressources SET niveauclasse = \'' . ($cout['niveauclasse'] + 1) . '\' WHERE login=\'' . $_SESSION['login'] . '\'';
+                        $ex1 = mysqli_query($base, $sql1) or die('Erreur SQL !<br />' . $sql1 . '<br />' . mysql_error());
 
-                    $chaine = "";
-                    foreach ($nomsRes as $num => $ressource) {
-                        $plus = "";
-                        if ($num < $nbRes) {
-                            $plus = ",";
+                        $chaine = "";
+                        foreach ($nomsRes as $num => $ressource) {
+                            $plus = "";
+                            if ($num < $nbRes) {
+                                $plus = ",";
+                            }
+                            $chaine = $chaine . '' . $ressource . '=' . $$ressource . '' . $plus;
                         }
-                        $chaine = $chaine . '' . $ressource . '=' . $$ressource . '' . $plus;
+                        $sql2 = 'UPDATE molecules SET ' . $chaine . ', formule=\'' . $formule . '\' WHERE proprietaire=\'' . $_SESSION['login'] . '\' AND numeroclasse=\'' . $_POST['emplacementmoleculecreer1'] . '\'';
+                        $req2 = mysqli_query($base, $sql2) or die('Erreur SQL !<br />' . $sql2 . '<br />' . mysql_error());
+
+                        $sql3 = 'UPDATE ressources SET energie = \'' . ($cout['energie'] - coutClasse($cout['niveauclasse'])) . '\' WHERE login=\'' . $_SESSION['login'] . '\'';
+                        $ex3 = mysqli_query($base, $sql3) or die('Erreur SQL !<br />' . $sql3 . '<br />' . mysql_error());
+
+                        $information = "Une nouvelle classe de molécule a été créée.";
+                    } else {
+                        $erreur = "Vous n'avez pas assez d'energie.";
                     }
-                    $sql2 = 'UPDATE molecules SET ' . $chaine . ', formule=\'' . $formule . '\' WHERE proprietaire=\'' . $_SESSION['login'] . '\' AND numeroclasse=\'' . $_POST['emplacementmoleculecreer1'] . '\'';
-                    $req2 = mysqli_query($base, $sql2) or die('Erreur SQL !<br />' . $sql2 . '<br />' . mysql_error());
-
-                    $sql3 = 'UPDATE ressources SET energie = \'' . ($cout['energie'] - coutClasse($cout['niveauclasse'])) . '\' WHERE login=\'' . $_SESSION['login'] . '\'';
-                    $ex3 = mysqli_query($base, $sql3) or die('Erreur SQL !<br />' . $sql3 . '<br />' . mysql_error());
-
-                    $information = "Une nouvelle classe de molécule a été créée.";
                 } else {
-                    $erreur = "Vous n'avez pas assez d'energie.";
+                    $erreur = "Cette classe existe déjà.";
                 }
             } else {
                 $erreur = "Votre molécule doit au moins être composée d'un atome.";
