@@ -556,7 +556,6 @@ function updateActions($joueur)
         if ($actions['attaqueFaite'] == 0 && $actions['tempsAttaque'] < time()) { // on fait l'attaque
             if ($actions['troupes'] != 'Espionnage') {
                 query('UPDATE actionsattaques SET attaqueFaite=1 WHERE id=\'' . $actions['id'] . '\'');
-
                 if ($actions['attaquant'] == $joueur) {
                     $enFace = $actions['defenseur'];
                     updateRessources($actions['defenseur'], $nomsRes);
@@ -923,7 +922,7 @@ function updateActions($joueur)
     }
 
     $ex = query('SELECT * FROM actionsenvoi WHERE (receveur=\'' . $joueur . '\' OR envoyeur=\'' . $joueur . '\') AND tempsArrivee<\'' . time() . '\'');
-
+	//j'ai un pb d'array mis dans un string ça doit être inhérent a la version de PHP
     while ($actions = mysqli_fetch_array($ex)) {
         query('DELETE FROM actionsenvoi WHERE id=\'' . $actions['id'] . '\'');
 
@@ -1093,6 +1092,7 @@ function initPlayer($joueur)
     }
 
     $production = '<strong><span id="nbPointsRestants">' . $constructions['pointsProducteurRestants'] . '</span> points</strong> à placer<br/><form method="post" action="constructions.php" name="formPointsProducteur">';
+//fait chier le monde y'en a 10 par page
     revenuAtomeJavascript($joueur); // ecrit la fonction en javscript qui donne la production pour un nombre de points
     foreach ($nomsRes as $num => $ressource) {
         $production = $production . nombreAtome($num, '<span style="color:green">+<span id="nbPointsAffichage' . $ressource . '">' . $revenu[$ressource] . '</span>/h</span> <input type="hidden" value="0" id="nbPoints' . $ressource . '" name="nbPoints' . $ressource . '"/><a href="#"><img class="imageAide" src="images/add.png" alt="add" style="margin-left:10px" id="add' . $ressource . '"/></a>');
@@ -1390,7 +1390,6 @@ function diminuerBatiment($nom, $joueur)
     }
 
     initPlayer($joueur);
-
     $ex = query('SELECT ' . $nom . ' FROM constructions WHERE login=\'' . $joueur . '\'');
     $batiments = mysqli_fetch_array($ex);
 
@@ -1454,7 +1453,7 @@ function diminuerBatiment($nom, $joueur)
         ajouterPoints(-$listeConstructions[$nom]['points'], $joueur);
     }
 
-    initPlayer($_SESSION['login']);
+    initPlayer($joueur);
 }
 
 function coordonneesAleatoires()
