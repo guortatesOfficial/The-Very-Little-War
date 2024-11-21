@@ -20,7 +20,7 @@ if(!isset($_GET['id'])
 $_GET['id'] = antiXSS($_GET['id']);
 
 if (isset($_POST['titre']) and isset($_POST['contenu'])) {
-	if (isset($_SESSION['login'])) {
+	if (isset($_SESSION['login']) && $_GET['id'] != 7) {
 		if (!empty($_POST['titre']) and !empty($_POST['contenu'])) {
 			$_POST['titre'] = mysqli_real_escape_string($base, ($_POST['titre']));
 			$_POST['contenu'] = mysqli_real_escape_string($base, $_POST['contenu']);
@@ -165,7 +165,7 @@ $idforum = mysqli_fetch_array($ex);
 	}
 	finCarte();
 
-	if (isset($_SESSION['login'])) {
+	if (isset($_SESSION['login']) && $_GET['id'] != 7) {
 		debutCarte("Créer un sujet");
 
 		?><form action="listesujets.php?id=<?php if (isset($_GET['id'])) {
